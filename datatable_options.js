@@ -205,8 +205,24 @@ function postpagination(){
             //$(".b-contentTable input[type = 'checkbox']").addClass("b-checkStyle").styler();
         //}, 500);
         hideShowText();
-}
-};  
+    },
+        'fnStateSave': function(oSettings, oData) {
+            localStorage.setItem('DataTables_lasttable_', JSON.stringify(oData));
+        },
+        'fnStateLoad': function(oSettings) {
+            var data = localStorage.getItem('DataTables_lasttable');
+            return JSON.parse(data);
+        },
+        "fnInitComplete": function(oSettings) {
+            var cols = oSettings.aoPreSearchCols;
+            for (var i = 0; i < cols.length; i++) {
+                var value = cols[i].sSearch;
+                if (value.length > 0) $(".search_init")[i].value = value;
+            }
+        },
+
+
+    };
 }
 $(document).ready(function(){
     var config =  $.extend(default_config, local_config);
