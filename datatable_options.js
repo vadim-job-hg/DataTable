@@ -27,28 +27,27 @@ var default_config = {
         "fnServerData":function(sSource, aoData, fnCallback) {
             aoData.push({"name": "name", "value": 'value'});
             aoDatagl = aoData;
-            $.ajax({
-                    "dataType": 'json',
-                    "type": "GET",
-                    "url": sSource,
-                    "data": aoData,
-                    "success": function (data) {
-                        manual_actions(data);
-                        fnCallback.call(this, data)
-                    }
-                })
-            },
-            "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-                $('td:eq(0)', nRow).html('' + aData[0] + '');
-                $('td:eq(1)', nRow).html('' + aData[1] + '');
-
-                return nRow;
-            },
-            "fnDrawCallback": function(oSettings) {
-                callback_func();
-            }
+                $.ajax({
+                        "dataType": 'json',
+                        "type": "GET",
+                        "url": sSource,
+                        "data": aoData,
+                        "success": function (data) {
+                            manual_actions(data);
+                            fnCallback.call(this, data)
+                        }
+                    });
+        },
+        "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+            $('td:eq(0)', nRow).html('' + aData[0] + '');
+            $('td:eq(1)', nRow).html('' + aData[1] + '');
+            return nRow;
+        },
+        "fnDrawCallback": function(oSettings) {
+            //callback_func();
         }
-};
+    }
+
 function postpagination(){
     //$('head').append('<style>#frm_list_processing:before {content:"Processing"}</style>'); //Remove this and change css
     $.fn.dataTableExt.oPagination.postpagination = {
