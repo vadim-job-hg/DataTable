@@ -22,7 +22,6 @@ class DataTablesAjax(ajax.JSONResponseMixin, ajax.AjaxResponseMixin, AdminView):
 
     def filter(self, request, model):
         objects = model.objects.values(*self.column_list)[int(request.GET['iDisplayStart']):(int(request.GET['iDisplayStart']) + int(request.GET['iDisplayLength']))]
-        #todo проверить оптимально ли выполение среза? Делается выборка из всей БД? [int(request.GET['iDisplayStart']):(int(request.GET['iDisplayStart']) + int(request.GET['iDisplayLength']))]
         count = model.objects.values(*self.column_list).count()
         response =  {'list':objects, 'count':count}
         return response
