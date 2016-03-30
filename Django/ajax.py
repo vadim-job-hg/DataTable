@@ -1,16 +1,14 @@
-from tipe10ru.views.admintemplate import AdminView
-from tipe10ru.models import VkQuotes, VkCourse, VkUsers, VkCourseGroup, VkLesson
-from tipe10ru.views.helpviews import ajax
+from django.views.generic import TemplateView
+from sitename.models import VkQuotes, VkCourse, VkUsers, VkCourseGroup, VkLesson
+from sitename.helpviews import ajax
 
-class DataTablesAjax(ajax.JSONResponseMixin, ajax.AjaxResponseMixin, AdminView):
+class DataTablesAjax(ajax.JSONResponseMixin, ajax.AjaxResponseMixin, sitename):
     json_response = {}
-    allowed_methods = {'quotes':VkQuotes, 'courses':VkCourse, 'users':VkUsers, 'coursegroup':VkCourseGroup, 'lessons':VkLesson}
+    allowed_methods = {'method1':Modelname1, 'method2':Modelname2, 'method3':Modelname3}
     column_list = {
-        'quotes':["id", "img", "text", "lesson_order", "visible"],
-        'courses':["id", "name", "group", "active"],
-        'coursegroup':["id", "name", "flag", "order", "active"],
-        'users':["id", "username", "email", "password", "hash"],
-        'lessons':["id", "text_num", "name", "number", "course"]
+        'method1':["field1", "field2", "field3"],
+        'method2':["field1", "field2", "field3"],
+        'method3':["field1", "field2", "field3"],
     }
     current_method = None
     def get_ajax(self, request, name, *args, **kwargs):
@@ -25,7 +23,7 @@ class DataTablesAjax(ajax.JSONResponseMixin, ajax.AjaxResponseMixin, AdminView):
                 self.json_response = self.json_format(request, filter['list'], filter['count'])
         return self.render_json_response(self.json_response)
 
-    #def dt_quotes(self, request, model):
+    #def dt_method1(self, request, model):
     #    filter = self.filter(request, model)
     #    return self.json_format(request, filter['list'], filter['count'])
 
