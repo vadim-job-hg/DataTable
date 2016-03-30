@@ -19,12 +19,7 @@
                 null,
                 null
         ],
-        "sAjaxSource": "/ajax/datatables/method1/",
-        "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-            $('td:eq(0)', nRow).html('<a class="j-quote-edit c-edit-class" rel="'+ aData[0] +'">edit</a>');
-            $('td:eq(2)', nRow).html(aData[2].replace(/<\/?[^>]+>/g,''));
-            return nRow;
-        }
+        "sAjaxSource": "/ajax/datatables/method1/"
     }
 </script>
     <table id="datatable" class="display" cellspacing="0" width="100%">
