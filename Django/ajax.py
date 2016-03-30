@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from sitename.models import VkQuotes, VkCourse, VkUsers, VkCourseGroup, VkLesson
+from sitename.models import Modelname1, Modelname2, Modelname3
 from sitename.helpviews import ajax
 
 class DataTablesAjax(ajax.JSONResponseMixin, ajax.AjaxResponseMixin, sitename):
