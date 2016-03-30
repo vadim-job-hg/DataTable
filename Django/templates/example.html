@@ -1,0 +1,54 @@
+{% extends "base-template.html" %}
+{% load staticfiles %}
+{% block title %}Title{% endblock %}
+{% block style %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "css/admin-datatable.css" %}">
+{% endblock %}
+{% block script %}
+{{ block.super }}
+<script src="{% static "js/admin/jquery.dataTables.min.js" %}"></script>
+<script src="{% static "js/admin/dataTablesInit.js" %}"></script>
+{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    var csrfmiddlewaretoken = '{{ csrf_token }}';
+    local_config = {
+        "columns": [
+			{ "data": "field1" },
+			{ "data": "field2" },
+			{ "data": "field3" },
+		],
+        "aoColumns": [
+                null,
+                null,
+                null
+        ],
+        "sAjaxSource": "/ajax/datatables/method1/",
+        "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+            $('td:eq(0)', nRow).html('<a class="j-quote-edit c-edit-class" rel="'+ aData[0] +'">edit</a>');
+            $('td:eq(2)', nRow).html(aData[2].replace(/<\/?[^>]+>/g,''));
+            return nRow;
+        }
+    }
+</script>
+    <table id="datatable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>field1</th>
+                <th>field2</th>
+                <th>field3</th>
+            </tr>
+        </thead>
+        <!--tfoot>
+            <tr>
+                <th><input class="search_init" type="text" name="field1" placeholder="field1" ></th>
+                <th><input class="search_init" type="text" name="field2" placeholder="field2" ></th>
+                <th><input class="search_init" type="text" name="field3" placeholder="field3" ></th>
+            </tr>
+        </tfoot-->
+        <tbody>
+
+        </tbody>
+    </table>
+{% endblock %}
