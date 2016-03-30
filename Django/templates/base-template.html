@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>{% block title %}admin tipe10.ru{% endblock %}</title>
+    {% block style %}<link rel="stylesheet" type="text/css" href="{% static "css/admin-base.css" %}">{% endblock %}
+    {% block script %}
+    <script src="{% static "js/jquery-2.2.2.min.js" %}"></script>
+    {% endblock %}
+</head>
+<body>
+    {% block menu %}
+        {% for menu_item in menu %}
+            <a href="{{ menu_item.url }}">{{ menu_item.name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endfor %}
+    {% endblock %}
+    <div id="page">
+	{% block content %}
+        what do you search?
+    {% endblock %}
+    </div>
+</body>
+</html>
