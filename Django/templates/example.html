@@ -1,14 +1,9 @@
 {% extends "base-template.html" %}
 {% load staticfiles %}
-{% block title %}Title{% endblock %}
-{% block style %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static "css/admin-datatable.css" %}">
-{% endblock %}
 {% block script %}
 {{ block.super }}
 <script src="{% static "js/admin/jquery.dataTables.min.js" %}"></script>
-<script src="{% static "js/admin/dataTablesInit.js" %}"></script>
+<script src="{% static "js/admin/datatable_options.js" %}"></script>
 {% endblock %}
 {% block content %}
 <script type="text/javascript">
@@ -40,13 +35,6 @@
                 <th>field3</th>
             </tr>
         </thead>
-        <!--tfoot>
-            <tr>
-                <th><input class="search_init" type="text" name="field1" placeholder="field1" ></th>
-                <th><input class="search_init" type="text" name="field2" placeholder="field2" ></th>
-                <th><input class="search_init" type="text" name="field3" placeholder="field3" ></th>
-            </tr>
-        </tfoot-->
         <tbody>
 
         </tbody>
