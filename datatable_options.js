@@ -267,3 +267,35 @@ function curPageReload() {
     var iCurrentPage = Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength);
     oTable.fnPageChange(iCurrentPage);
 }
+
+function callBackDataTable(oSettings) {
+    var agentids = [];
+    $('.j-agent-name').each(function() {
+        if($( this ).html()=='loading')
+            agentids.push($( this ).attr('rel'));
+    });
+    if(agentids.length)
+        $.ajax({
+            "dataType": 'json',
+            "type": "POST",
+            "url": 'url',
+            "data": {'agentids':agentids},
+            "success": updateDataTable
+        });
+}
+
+function updateDataTable(data) {
+
+    for (var index in data) {
+        $('#Agent_' + index.replace(" ", "_")).html(data[index]);
+    }
+    if (typeof oTable != 'undefined' && typeof oTable.fnGetData != 'undefined') {
+        var oSettings = oTable.fnSettings();
+        //oSettings._iDisplayStart / oSettings._iDisplayLength);
+        sData = oTable.fnGetData();
+        for (index in sData)
+            if(sData[index].AgentName=='loading' && typeof data[sData[index].RegNumber] !=='undefined')
+                sData[index].AgentName = data[sData[index].RegNumber];
+        oTable.sourse = sData;
+    }
+}
