@@ -299,3 +299,23 @@ function updateDataTable(data) {
         oTable.sourse = sData;
     }
 }
+
+function filterDataTable(){
+    var selection = $.map($('.j-regStatusFilter:checked'), function (element) {
+        return element.value;
+    });
+    if(selection.length) {
+        selection = selection.join('|').replace(/\s/g, '.');
+        oTable.DataTable().column(3).search(
+            '(' + selection + ')',
+            true,
+            true
+        );
+    }
+    else oTable.DataTable().column(3).search('',true,true);
+    oTable.fnFilter($('#j-regNumberFilter').val(), 0);
+    oTable.fnFilter($('#j-regMakeFilter').val(), 1);
+    oTable.fnFilter($('#j-regModelFilter').val(), 2);
+    oTable.fnFilter($('#j-regSiteFilter').val(), 5);
+    return false;
+}
